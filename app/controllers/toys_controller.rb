@@ -6,20 +6,30 @@ class ToysController < ApplicationController
     render json: toys
   end
 
+  def show
+    toy = Toy.find_by(params[:id])
+    render json: toy
+  end
+
   def create
-    toy = Toys.create(toy_params)
+    byebug
+    toy = Toy.create(toy_params)
     render json: toy, status: :created
   end
 
   def update
     toy = Toy.find_by(id: params[:id])
     toy.update(toy_params)
+    render json: toy
   end
 
   def destroy
+    byebug
     toy = Toy.find_by(id: params[:id])
     toy.destroy
     head :no_content
+    
+
   end
 
   private
